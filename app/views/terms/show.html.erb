@@ -1,0 +1,14 @@
+<div class="tou-container">
+  <h1><%= I18n.t("terms_of_use.title") %></h1>
+  <div class="tou-content">
+    <%= SiteSetting.terms_of_use_text.html_safe %>
+  </div>
+  <form action="/terms-of-use/accept" method="post" class="tou-form">
+    <%= csrf_meta_tags %>
+    <label>
+      <input type="checkbox" name="terms_accepted" required>
+      <%= I18n.t("terms_of_use.i_accept") %>
+    </label>
+    <button type="submit" class="btn btn-primary"><%= I18n.t("terms_of_use.continue") %></button>
+  </form>
+</div> 

@@ -1,1 +1,6 @@
 en:
+  terms_of_use:
+    title: "Terms of Use"
+    i_accept: "I accept the terms of use."
+    continue: "Continue"
+    must_accept: "You must accept the terms of use to continue."
