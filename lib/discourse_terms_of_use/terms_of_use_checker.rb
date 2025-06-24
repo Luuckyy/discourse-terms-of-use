@@ -5,7 +5,7 @@ module DiscourseTermsOfUse
     extend ActiveSupport::Concern
 
     included do
-      prepend_before_action :check_terms_of_use_acceptance, if: -> { SiteSetting.terms_of_use_enabled && current_user&.active? && request.format.html? }
+      prepend_before_action :check_terms_of_use_acceptance, if: -> { SiteSetting.terms_of_use_enabled && current_user&.active? }
     end
 
     private
