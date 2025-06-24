@@ -16,7 +16,6 @@ module ::DiscourseTermsOfUse
 end
 
 require_relative "lib/discourse_terms_of_use/engine"
-require_relative "lib/discourse_terms_of_use/terms_of_use_checker"
 
 register_asset "stylesheets/terms_of_use.scss"
 
