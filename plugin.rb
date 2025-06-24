@@ -8,6 +8,8 @@
 # url: https://github.com/Luuckyy/discourse-terms-of-use
 # required_version: 2.7.0
 
+enabled_site_setting :terms_of_use_enabled
+
 module ::DiscourseTermsOfUse
   PLUGIN_NAME = "discourse-terms-of-use"
   USER_ACCEPTED_TERMS_FIELD = "user_accepted_terms_at"
