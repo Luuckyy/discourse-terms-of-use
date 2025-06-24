@@ -16,25 +16,13 @@ module ::DiscourseTermsOfUse
 end
 
 require_relative "lib/discourse_terms_of_use/engine"
+require_relative "lib/discourse_terms_of_use/terms_of_use_checker"
 
 register_asset "stylesheets/terms_of_use.scss"
 
 after_initialize do
   if SiteSetting.terms_of_use_enabled
     User.register_custom_field_type(DiscourseTermsOfUse::USER_ACCEPTED_TERMS_FIELD, :datetime)
-
-    ApplicationController.class_eval do
-      prepend_before_action :check_terms_of_use_acceptance, if: -> { SiteSetting.terms_of_use_enabled && current_user && request.format.html? }
-
-      def check_terms_of_use_acceptance
-        return if current_user.custom_fields[DiscourseTermsOfUse::USER_ACCEPTED_TERMS_FIELD].present?
-        return if current_user.staff?
-        
-        exempt_paths = ["/terms-of-use", "/users/logout-and-redirect", "/about"]
-        return if exempt_paths.include?(request.path) || request.path.start_with?("/u/admin-login") || request.path.start_with?("/assets/")
-
-        redirect_to "/terms-of-use"
-      end
-    end
+    ApplicationController.include(DiscourseTermsOfUse::TermsOfUseChecker)
   end
 end
