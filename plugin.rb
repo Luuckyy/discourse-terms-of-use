@@ -23,5 +23,9 @@ after_initialize do
   if SiteSetting.terms_of_use_enabled
     User.register_custom_field_type(DiscourseTermsOfUse::USER_ACCEPTED_TERMS_FIELD, :datetime)
     ApplicationController.include(DiscourseTermsOfUse::TermsOfUseChecker)
+
+    DiscourseTermsOfUse::TermsController.class_eval do
+      skip_before_action :check_terms_of_use_acceptance
+    end
   end
 end

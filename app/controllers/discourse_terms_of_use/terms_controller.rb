@@ -2,7 +2,6 @@
 
 module ::DiscourseTermsOfUse
   class TermsController < ::ApplicationController
-    skip_before_action :check_terms_of_use_acceptance
 
     def show
       render "terms/show", layout: "no-ember"
