@@ -1,21 +1,4 @@
-<%
-  content_for :title do
-    I18n.t("terms_of_use.title")
-  end
-%>
-
-<style>
-  .tou-container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-  .tou-content { margin: 20px 0; line-height: 1.6; }
-  .tou-form { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
-  .tou-form label { display: flex; align-items: center; margin-bottom: 20px; }
-  .tou-form input[type="checkbox"] { margin-right: 10px; }
-  .btn { padding: 12px 24px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-  .btn:hover { background: #0056b3; }
-</style>
-
-<div class="tou-container">
-  <h1><%= I18n.t("terms_of_use.title") %></h1>
+<div class="simple-container tou-container">
   <div class="tou-content">
     <%= SiteSetting.terms_of_use_text.html_safe %>
   </div>
@@ -28,3 +11,24 @@
     <button type="submit" class="btn btn-primary"><%= I18n.t("terms_of_use.continue") %></button>
   </form>
 </div> 
+
+<% content_for :title do %><%="Terms of Use" %><% end %>
+
+<%- content_for(:no_ember_head) do %>
+  <meta name="referrer" content="never">
+  <%= render_google_universal_analytics_code %>
+<%- end %>
+
+<%- content_for(:head) do %>
+  <meta name="referrer" content="never">
+<%- end %>
+
+<style>
+  .tou-container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .tou-content { margin: 20px 0; line-height: 1.6; }
+  .tou-form { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+  .tou-form label { display: flex; align-items: center; margin-bottom: 20px; }
+  .tou-form input[type="checkbox"] { margin-right: 10px; }
+  .btn { padding: 12px 24px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+  .btn:hover { background: #0056b3; }
+</style>
