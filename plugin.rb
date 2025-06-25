@@ -11,11 +11,6 @@
 enabled_site_setting :terms_of_use_enabled
 
 after_initialize do
-  require_relative "app/controllers/discourse_terms_of_use/terms_controller"
-  require_relative "lib/discourse_terms_of_use/terms_of_use_checker"
-
-  register_asset "stylesheets/terms_of_use.scss"
-
   module ::DiscourseTermsOfUse
     PLUGIN_NAME = "discourse-terms-of-use"
     USER_ACCEPTED_TERMS_FIELD = "user_accepted_terms_at"
@@ -25,6 +20,11 @@ after_initialize do
       isolate_namespace DiscourseTermsOfUse
     end
   end
+
+  require_relative "app/controllers/discourse_terms_of_use/terms_controller"
+  require_relative "lib/discourse_terms_of_use/terms_of_use_checker"
+
+  register_asset "stylesheets/terms_of_use.scss"
 
   DiscourseTermsOfUse::Engine.routes.draw do
     get "/" => "terms#show"
