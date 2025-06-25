@@ -5,7 +5,7 @@ module DiscourseTermsOfUse
     extend ActiveSupport::Concern
 
     included do
-      prepend_before_action :check_terms_of_use_acceptance, if: -> { SiteSetting.terms_of_use_enabled && current_user&.active? }
+      prepend_before_action :check_terms_of_use_acceptance, if: -> { SiteSetting.terms_of_use_enabled && current_user&.active? && request.format.html? }
     end
 
     private
@@ -17,7 +17,7 @@ module DiscourseTermsOfUse
       exempt_paths = ["/terms-of-use", "/users/logout-and-redirect", "/about"]
       return if exempt_paths.include?(request.path) || request.path.start_with?("/u/admin-login") || request.path.start_with?("/assets/")
 
-      redirect_to "/terms-of-use"
+      redirect_to "/terms-of-use" and return
     end
   end
 end 
