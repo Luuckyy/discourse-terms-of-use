@@ -6,7 +6,7 @@ class TermsController < ::ApplicationController
   before_action :ensure_logged_in, only: :accept
 
   def show
-    render :show
+    render :show, layout: "no_ember"
   end
 
   def accept
