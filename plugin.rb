@@ -25,7 +25,7 @@ after_initialize do
     ApplicationController.include(DiscourseTermsOfUse::TermsOfUseChecker)
 
     DiscourseTermsOfUse::TermsController.class_eval do
-      skip_before_action :check_terms_of_use_acceptance
+      skip_before_action :check_terms_of_use_acceptance, raise: false
     end
   end
 end

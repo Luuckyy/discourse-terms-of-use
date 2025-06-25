@@ -14,8 +14,13 @@ module DiscourseTermsOfUse
       return if current_user.custom_fields[DiscourseTermsOfUse::USER_ACCEPTED_TERMS_FIELD].present?
       return if current_user.staff?
       
-      exempt_paths = ["/terms-of-use", "/users/logout-and-redirect", "/about"]
-      return if exempt_paths.include?(request.path) || request.path.start_with?("/u/admin-login") || request.path.start_with?("/assets/")
+      # Skip check if we're already on the terms controller
+      return if controller_name == "terms" && controller.class.name.include?("DiscourseTermsOfUse")
+      
+      # More comprehensive path exemptions
+      exempt_paths = ["/terms-of-use", "/terms-of-use/", "/users/logout-and-redirect", "/about"]
+      return if exempt_paths.any? { |path| request.path == path || request.path.start_with?(path) }
+      return if request.path.start_with?("/u/admin-login") || request.path.start_with?("/assets/")
 
       redirect_to "/terms-of-use" and return
     end

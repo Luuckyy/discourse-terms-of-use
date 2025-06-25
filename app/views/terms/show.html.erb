@@ -4,9 +4,9 @@
     <%= SiteSetting.terms_of_use_text.html_safe %>
   </div>
   <form action="/terms-of-use/accept" method="post" class="tou-form">
-    <%= csrf_meta_tags %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <label>
-      <input type="checkbox" name="terms_accepted" required>
+      <input type="checkbox" name="terms_accepted" value="1" required>
       <%= I18n.t("terms_of_use.i_accept") %>
     </label>
     <button type="submit" class="btn btn-primary"><%= I18n.t("terms_of_use.continue") %></button>
