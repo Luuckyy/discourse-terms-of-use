@@ -27,5 +27,10 @@ after_initialize do
     DiscourseTermsOfUse::TermsController.class_eval do
       skip_before_action :check_terms_of_use_acceptance, raise: false
     end
+
+    Discourse::Application.routes.append do
+      get '/terms-of-use' => 'terms#show'
+      post "/terms-of-use/accept" => "terms#accept"
+    end
   end
 end
