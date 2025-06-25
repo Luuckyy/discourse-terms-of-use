@@ -18,7 +18,7 @@ module DiscourseTermsOfUse
       return if controller_name == "terms" && controller.class.name.include?("DiscourseTermsOfUse")
       
       # More comprehensive path exemptions
-      exempt_paths = ["/terms-of-use", "/terms-of-use/", "/users/logout-and-redirect", "/about"]
+      exempt_paths = ["/terms-of-use", "/w/terms-of-use", "/users/logout-and-redirect", "/about"]
       return if exempt_paths.any? { |path| request.path == path || request.path.start_with?(path) }
       return if request.path.start_with?("/u/admin-login") || request.path.start_with?("/assets/")
 
