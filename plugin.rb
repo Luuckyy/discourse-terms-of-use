@@ -28,9 +28,6 @@ after_initialize do
       skip_before_action :check_terms_of_use_acceptance, raise: false
     end
 
-    Discourse::Application.routes.append do
-      get '/terms-of-use' => 'terms#show'
-      post "/terms-of-use/accept" => "terms#accept"
-    end
+    Discourse::Application.routes.append { mount ::DiscourseTermsOfUse::Engine, at: "/terms-of-use" }
   end
 end
