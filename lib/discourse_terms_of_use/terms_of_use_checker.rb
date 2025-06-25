@@ -22,6 +22,14 @@ module DiscourseTermsOfUse
       return if exempt_paths.any? { |path| request.path == path || request.path.start_with?(path) }
       return if request.path.start_with?("/u/admin-login") || request.path.start_with?("/assets/")
 
+      puts "================================================"
+      puts "================================================"
+      puts "================================================"
+      puts "Redirecting to terms page from #{request.path}"
+      puts "================================================"
+      puts "================================================"
+      puts "================================================"
+
       redirect_to "/terms-of-use" and return
     end
   end
