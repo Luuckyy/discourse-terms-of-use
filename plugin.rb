@@ -15,6 +15,7 @@ after_initialize do
   end
 
   register_asset "stylesheets/terms_of_use.scss"
+  register_asset "javascripts/discourse/initializers/add-terms-of-use-route.js.es6", :server_side
 
   reloadable_patch do
     ApplicationController.prepend(Module.new do
