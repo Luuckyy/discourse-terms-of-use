@@ -8,33 +8,27 @@
 # url: https://github.com/Luuckyy/discourse-terms-of-use
 # required_version: 2.7.0
 
-enabled_site_setting :terms_of_use_enabled
-
 after_initialize do
-  module ::DiscourseTermsOfUse
-    PLUGIN_NAME = "discourse-terms-of-use"
-    USER_ACCEPTED_TERMS_FIELD = "user_accepted_terms_at"
-  
-    class Engine < ::Rails::Engine
-      engine_name PLUGIN_NAME
-      isolate_namespace DiscourseTermsOfUse
-    end
+  Discourse::Application.routes.prepend do
+    get '/terms-of-use' => 'terms_of_use#show'
+    post '/terms-of-use/accept' => 'terms_of_use#accept'
   end
-
-  require_relative "app/controllers/terms_controller"
-  require_relative "lib/terms_of_use_checker"
 
   register_asset "stylesheets/terms_of_use.scss"
 
-  DiscourseTermsOfUse::Engine.routes.draw do
-    get "/" => "terms#show"
-    post "/accept" => "terms#accept"
-  end
-
-  Discourse::Application.routes.append { mount ::DiscourseTermsOfUse::Engine, at: "/terms-of-use" }
-
-  if SiteSetting.terms_of_use_enabled
-    User.register_custom_field_type(DiscourseTermsOfUse::USER_ACCEPTED_TERMS_FIELD, :datetime)
-    ApplicationController.include(TermsOfUseChecker)
+  reloadable_patch do
+    ApplicationController.prepend(Module.new do
+      def check_terms_of_use
+        if current_user && !current_user.anonymous? && current_user.custom_fields['terms_of_use_accepted'] != 'true'
+          unless request.path.starts_with?("/terms-of-use") || request.format.json?
+            redirect_to '/terms-of-use' and return
+          end
+        end
+      end
+  
+      def self.prepended(base)
+        base.before_action :check_terms_of_use
+      end
+    end)
   end
 end

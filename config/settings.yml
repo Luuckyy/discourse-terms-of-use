@@ -1,6 +1,7 @@
 plugins:
   terms_of_use_enabled:
     default: false
-  terms_of_use_text:
-    type: "long_text"
-    default: "" 
+    client: false
+  terms_of_use_content:
+    default: "<p>Entrez ici vos Conditions d'Utilisation...</p>"
+    client: true

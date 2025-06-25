@@ -1,6 +1,4 @@
 fr:
-  terms_of_use:
-    title: "Conditions d'utilisation"
-    i_accept: "J'accepte les conditions d'utilisation."
-    continue: "Continuer"
-    must_accept: "Vous devez accepter les conditions d'utilisation pour continuer." 
+  site_settings:
+    terms_of_use_enabled: "Activer les conditions d'utilisation obligatoires"
+    terms_of_use_content: "Contenu des conditions d'utilisation (HTML autorisé)"
