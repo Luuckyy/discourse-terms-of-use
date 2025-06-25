@@ -8,7 +8,7 @@
 # url: https://github.com/Luuckyy/discourse-terms-of-use
 # required_version: 2.7.0
 
-register_site_setting :terms_of_use_content
+enabled_site_setting :terms_of_use_content
 
 after_initialize do
   Discourse::Application.routes.append do
