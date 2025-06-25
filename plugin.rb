@@ -8,13 +8,20 @@
 # url: https://github.com/Luuckyy/discourse-terms-of-use
 # required_version: 2.7.0
 
+register_asset "javascripts/discourse/terms-of-use-route.js", :client
+register_site_setting :terms_of_use_content
+
 after_initialize do
-  Discourse::Application.routes.prepend do
-    get '/terms-of-use' => 'terms_of_use#show'
-    post '/terms-of-use/accept' => 'terms_of_use#accept'
+  Discourse::Application.routes.append do
+    get "/terms-of-use" => "home#index", constraints: lambda { |req|
+      !req.xhr? && req.format.html?
+    }
   end
 
-  register_asset "stylesheets/terms_of_use.scss"
+  DiscoursePluginRegistry.define_custom_route(
+    path: "/terms-of-use",
+    name: "terms-of-use"
+  )
 
   reloadable_patch do
     ApplicationController.prepend(Module.new do
