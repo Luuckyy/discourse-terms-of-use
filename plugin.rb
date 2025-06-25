@@ -8,7 +8,6 @@
 # url: https://github.com/Luuckyy/discourse-terms-of-use
 # required_version: 2.7.0
 
-register_asset "javascripts/discourse/terms-of-use-route.js", :client
 register_site_setting :terms_of_use_content
 
 after_initialize do
