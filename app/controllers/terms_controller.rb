@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DiscourseTermsOfUse::TermsController < ::ApplicationController
+class TermsController < ::ApplicationController
   requires_plugin DiscourseTermsOfUse::PLUGIN_NAME
 
   before_action :ensure_logged_in, only: :accept

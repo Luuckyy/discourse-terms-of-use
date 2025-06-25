@@ -21,8 +21,8 @@ after_initialize do
     end
   end
 
-  require_relative "app/controllers/discourse_terms_of_use/terms_controller"
-  require_relative "lib/discourse_terms_of_use/terms_of_use_checker"
+  require_relative "app/controllers/terms_controller"
+  require_relative "lib/terms_of_use_checker"
 
   register_asset "stylesheets/terms_of_use.scss"
 
