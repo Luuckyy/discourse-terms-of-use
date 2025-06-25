@@ -17,11 +17,6 @@ after_initialize do
     }
   end
 
-  DiscoursePluginRegistry.define_custom_route(
-    path: "/terms-of-use",
-    name: "terms-of-use"
-  )
-
   reloadable_patch do
     ApplicationController.prepend(Module.new do
       def check_terms_of_use
