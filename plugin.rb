@@ -35,6 +35,6 @@ after_initialize do
 
   if SiteSetting.terms_of_use_enabled
     User.register_custom_field_type(DiscourseTermsOfUse::USER_ACCEPTED_TERMS_FIELD, :datetime)
-    ApplicationController.include(DiscourseTermsOfUse::TermsOfUseChecker)
+    ApplicationController.include(TermsOfUseChecker)
   end
 end
