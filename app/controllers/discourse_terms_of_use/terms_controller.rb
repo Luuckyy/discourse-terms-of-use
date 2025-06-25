@@ -6,7 +6,7 @@ class DiscourseTermsOfUse::TermsController < ::ApplicationController
   before_action :ensure_logged_in, only: :accept
 
   def show
-    render "terms/show", layout: "no-ember"
+    render "terms/show", layout: false
   end
 
   def accept
